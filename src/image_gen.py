@@ -16,13 +16,15 @@ def create_csv(filename, num_rows, data, remain):
     # Combine CMD, data, TLAST, and TKEEP into a single array
     combined_data = np.concatenate([cmd_col, data, tlast, tkeep], axis=1)
 
-    empty = np.full((12), " ", dtype=object)
+    remaining_data = np.full((16), 0, dtype=object)
+
+    remaining_data[0:remain.shape[0]] = remain
 
     data_arr = np.full((1), "DATA", dtype=object)
 
-    tlast_keep_last = np.array([1,-1], dtype=np.int32)
+    tlast_keep_last = np.array([1,"0xFF"], dtype=object)
 
-    last_row = np.concatenate([data_arr, remain,empty, tlast_keep_last], axis=0)
+    last_row = np.concatenate([data_arr, remaining_data, tlast_keep_last], axis=0)
 
 
     # Write to CSV
@@ -44,8 +46,10 @@ Image.fromarray(array_image).save('resized_pepe.jpeg')
 #pyplot.show()
 print(array_image.shape)
 
-flattened = array_image.flatten()
-
+#flattened = array_image.flatten()
+dummy_Data = np.eye(18,dtype=np.uint8) *255
+flattened = dummy_Data.flatten()
+#flattened = np.arange(198,dtype=np.uint8)
 columns = 16
 
 # Calculate how many complete rows can be made

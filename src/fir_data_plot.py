@@ -4,7 +4,10 @@ import glob
 import numpy as np
 import pandas as pd
 
-csv_files = ["input_fir.csv", "output0.csv"]
+csv_files = [
+            "input_fir.csv",
+            "output0.csv"
+]
 plot_names = ["Frequency unfiltered", "Frequency filtered"]
 
 data_frames = []
@@ -23,7 +26,7 @@ x_axis = [
     x,
     np.delete(x,[1,2,3])
 ]
-print(x_axis)
+#print(x_axis)
 colors = ["green", "red"]
 fig = make_subplots(rows=4, cols=1)
 for idx,df in enumerate(data_frames):
