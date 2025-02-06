@@ -4,6 +4,7 @@
 #include <memory>
 #include <thread>
 #include <fstream>
+#include <math.h>
 
 #include <cstdio>
 #include <string.h>
@@ -13,6 +14,8 @@
 #include <errno.h> // Error integer and strerror() function
 #include <termios.h> // Contains POSIX terminal control definitions
 #include <unistd.h> // write(), read(), close()
+
+#define PI 3.14159265
 
 int configure_serial(int *serial_port, struct termios *tty) {
    // Read in existing settings, and handle any error
@@ -56,7 +59,7 @@ int configure_serial(int *serial_port, struct termios *tty) {
       return 0;
 }
 
-#define SERIAL_PORT "/dev/pts/13"
+#define SERIAL_PORT "/dev/pts/7"
 int main() {
 	std::cout << "Hello There \n";
 
@@ -69,10 +72,15 @@ int main() {
     }
     int count = 0;
     while (true) {
-        serialOut << count++ << std::endl;
+        float value= sin(count*2*PI/180);
+        serialOut << value << std::endl;
         serialOut.flush();  // Ensure data is sent
-        std::cout << "Sent: Message #" << count << std::endl;
-        std::this_thread::sleep_for(std::chrono::seconds(1));
+        if(count == 180)
+            count =0;
+        else
+            count++;    
+        //std::cout << "Sent: Message #" << count << std::endl;
+        //std::this_thread::sleep_for(std::chrono::seconds(1));
     }
     /*
     int serial_port = open("/dev/pts/13", O_RDWR); 
