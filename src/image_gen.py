@@ -34,11 +34,16 @@ def create_csv(filename, num_rows, data, remain):
         writer.writerows(combined_data)  # Write all rows
         writer.writerow(last_row)
 
-image = Image.open("pepeLightbulb.jpg")
+def create_hls_buffer(filename,data):
+    with open(filename,mode="w",newline="") as file:
+        writer =    csv.writer(file)
+        writer.writerow(data)
+
+image = Image.open("test_pic1.jpeg")
 
 #print(image.size)
 
-array_image = np.array(image.resize((130,130)).convert('L'))
+array_image = np.array(image.resize((66,66)).convert('L'))
 Image.fromarray(array_image).save('resized_pepe.jpeg')
 #image_plot = image.imread-('resized_pepe.jpeg')
 
@@ -46,10 +51,11 @@ Image.fromarray(array_image).save('resized_pepe.jpeg')
 #pyplot.show()
 print(array_image.shape)
 
-#flattened = array_image.flatten()
+flattened = array_image.flatten()
 dummy_Data = np.eye(18,dtype=np.uint8) *255
-flattened = dummy_Data.flatten()
-#flattened = np.arange(198,dtype=np.uint8)
+#flattened = dummy_Data.flatten()
+#flattened = np.arange(1024,dtype=np.uint8)
+#flattened = np.ones(400,dtype=np.uint8)
 columns = 16
 
 # Calculate how many complete rows can be made
@@ -64,6 +70,8 @@ remaining_elements = flattened[num_complete_rows * columns:]
 print("Full Array:")
 print(full_array.shape[0])
 print("\nRemaining Elements:")
-print(remaining_elements)
+print(remaining_elements.shape)
 
-create_csv("input_picture.csv", full_array.shape[0],full_array,remaining_elements)
+#create_hls_buffer("data_hls.csv",flattened)
+
+#create_csv("input_picture.csv", full_array.shape[0],full_array,remaining_elements)
