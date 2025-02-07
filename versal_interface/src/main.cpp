@@ -59,7 +59,8 @@ int configure_serial(int *serial_port, struct termios *tty) {
       return 0;
 }
 
-#define SERIAL_PORT "/dev/pts/7"
+//#define SERIAL_PORT "/dev/pts/7"
+#define SERIAL_PORT "CNCA2"
 int main() {
 	std::cout << "Hello There \n";
 
