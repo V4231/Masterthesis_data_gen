@@ -4,7 +4,7 @@ import glob
 import numpy as np
 import pandas as pd
 
-df = pd.read_csv("output_hls.csv",header=0)
+df = pd.read_csv("data_in/output_hls.csv",header=0)
 
 #print(df['DATA'])
 

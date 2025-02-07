@@ -59,8 +59,8 @@ int configure_serial(int *serial_port, struct termios *tty) {
       return 0;
 }
 
-//#define SERIAL_PORT "/dev/pts/7"
-#define SERIAL_PORT "CNCA2"
+#define SERIAL_PORT "/dev/pts/8"
+//#define SERIAL_PORT "CNCA2"
 int main() {
 	std::cout << "Hello There \n";
 
@@ -73,8 +73,14 @@ int main() {
     }
     int count = 0;
     while (true) {
-        float value= sin(count*2*PI/180);
-        serialOut << value << std::endl;
+        for(int i = 0; i< 4; i++){
+            float value= sin((i+1)*10*count*2*PI/180);
+            serialOut << value;
+            if(i < 3) {
+                serialOut << ',';
+            }
+        }
+        serialOut << std::endl;
         serialOut.flush();  // Ensure data is sent
         if(count == 180)
             count =0;
